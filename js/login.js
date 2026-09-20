@@ -99,8 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         showAlert('Login successful! Redirecting to Home...', 'success');
-        // Do NOT store token in localStorage or sessionStorage.
-        // Redirect directly to home.html which uses the HttpOnly cookie
+        if (data.token) {
+          sessionStorage.setItem('auth_token', data.token);
+          sessionStorage.setItem('user_name', data.name || '');
+        }
         setTimeout(() => {
           window.location.href = 'home.html';
         }, 800);
