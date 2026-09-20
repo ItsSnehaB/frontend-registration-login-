@@ -29,23 +29,23 @@
   "rewrites": [
     {
       "source": "/api/reg",
-      "destination": "https://REPLACE_WITH_YOUR_RENDER_USER_SERVICE.onrender.com/api/reg"
+      "destination": "https://reglogin-user-service.onrender.com/api/reg"
     },
     {
       "source": "/api/login",
-      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/login"
+      "destination": "https://reglogin-auth-service.onrender.com/api/login"
     },
     {
       "source": "/api/logout",
-      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/logout"
+      "destination": "https://reglogin-auth-service.onrender.com/api/logout"
     },
     {
       "source": "/api/me",
-      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/me"
+      "destination": "https://reglogin-auth-service.onrender.com/api/me"
     },
     {
       "source": "/api/health",
-      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/health"
+      "destination": "https://reglogin-auth-service.onrender.com/api/health"
     }
   ]
 }
