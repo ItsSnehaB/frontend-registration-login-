@@ -1,0 +1,11 @@
+{
+  "name": "frontend-reg-login",
+  "version": "1.0.0",
+  "description": "Frontend Registration and Login Web Application on Port 3036",
+  "scripts": {
+    "start": "npx serve -l 3036 ."
+  },
+  "keywords": ["html", "css", "javascript", "httponly-cookie", "jwt"],
+  "author": "RegLogin Team",
+  "license": "MIT"
+}

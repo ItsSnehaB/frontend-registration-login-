@@ -1,0 +1,51 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/reg",
+      "destination": "https://REPLACE_WITH_YOUR_RENDER_USER_SERVICE.onrender.com/api/reg"
+    },
+    {
+      "source": "/api/login",
+      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/login"
+    },
+    {
+      "source": "/api/logout",
+      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/logout"
+    },
+    {
+      "source": "/api/me",
+      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/me"
+    },
+    {
+      "source": "/api/health",
+      "destination": "https://REPLACE_WITH_YOUR_RENDER_AUTH_SERVICE.onrender.com/api/health"
+    }
+  ]
+}

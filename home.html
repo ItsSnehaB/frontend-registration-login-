@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - RegLogin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="home-card" id="home-card">
+    <div class="home-avatar" id="user-initial">U</div>
+    
+    <div class="session-badge">
+      <span class="session-indicator"></span>
+      <span>Authenticated Session (HttpOnly JWT Cookie)</span>
+    </div>
+
+    <!-- Exact requirement: Home displays "Welcome username" -->
+    <h1 class="home-welcome" id="welcome-message">Welcome</h1>
+    <p class="home-desc">You are successfully logged in via secure JWT HttpOnly cookie authentication.</p>
+
+    <div style="margin-top: 24px;">
+      <button id="logout-btn" class="btn-primary" style="max-width: 160px; margin: 0 auto; background-color: #dc2626;">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

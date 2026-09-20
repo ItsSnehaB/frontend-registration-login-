@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - RegLogin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container" id="login-container">
+    <div class="auth-header">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to your account</p>
+    </div>
+
+    <!-- Alert Box for Server Messages -->
+    <div class="alert-box" id="alert-box" role="alert"></div>
+
+    <form id="login-form" novalidate>
+      <!-- User Name -->
+      <div class="form-group">
+        <label for="name" class="form-label">User Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-input" 
+          placeholder="Enter your username" 
+          required 
+          autocomplete="username"
+        />
+        <div class="error-text" id="name-error"></div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-input" 
+          placeholder="Enter your password" 
+          required 
+          autocomplete="current-password"
+        />
+        <div class="error-text" id="password-error"></div>
+      </div>
+
+      <!-- Login button -->
+      <button type="submit" class="btn-primary" id="login-btn">Login</button>
+    </form>
+
+    <!-- Exact text requirement: “New user? Sign Up” -->
+    <div class="auth-footer">
+      <a href="signup.html" class="auth-link" id="signup-link">New user? Sign Up</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

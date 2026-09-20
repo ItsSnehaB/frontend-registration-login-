@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - RegLogin</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container" id="signup-container">
+    <div class="auth-header">
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Register to access secure microservices</p>
+    </div>
+
+    <!-- Alert Box for Server Messages -->
+    <div class="alert-box" id="alert-box" role="alert"></div>
+
+    <form id="signup-form" novalidate>
+      <!-- User Name -->
+      <div class="form-group">
+        <label for="name" class="form-label">User Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          class="form-input" 
+          placeholder="e.g. johndoe" 
+          required 
+          autocomplete="username"
+        />
+        <div class="error-text" id="name-error"></div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="form-input" 
+          placeholder="e.g. john@example.com" 
+          required 
+          autocomplete="email"
+        />
+        <div class="error-text" id="email-error"></div>
+      </div>
+
+      <!-- Phone Number -->
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          class="form-input" 
+          placeholder="e.g. +1 555-0199 or 10 digits" 
+          required 
+          autocomplete="tel"
+        />
+        <div class="error-text" id="phone-error"></div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          class="form-input" 
+          placeholder="Minimum 6 characters" 
+          required 
+          autocomplete="new-password"
+        />
+        <div class="error-text" id="password-error"></div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          name="confirmPassword" 
+          class="form-input" 
+          placeholder="Re-enter password" 
+          required 
+          autocomplete="new-password"
+        />
+        <div class="error-text" id="confirmPassword-error"></div>
+      </div>
+
+      <!-- Signup Button -->
+      <button type="submit" class="btn-primary" id="signup-btn">Sign Up</button>
+    </form>
+
+    <!-- Login link -->
+    <div class="auth-footer">
+      Already have an account? <a href="login.html" class="auth-link" id="login-link">Login</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>
