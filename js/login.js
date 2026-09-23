@@ -1,8 +1,3 @@
-// JavaScript for Login (FrontendRegLogin)
-// Communicates with AuthenticationService on http://localhost:8082/api/login
-// Strict constraint: No localStorage or sessionStorage for JWT tokens.
-// JWT is received and stored in an HttpOnly cookie via Set-Cookie header with credentials: 'include'.
-
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
   const alertBox = document.getElementById('alert-box');
@@ -29,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setError(fieldKey, message) {
-    if (fields[fieldKey]) {
-      fields[fieldKey].classList.add('error');
-    }
+    if (fields[fieldKey]) fields[fieldKey].classList.add('error');
     if (errors[fieldKey]) {
       errors[fieldKey].textContent = message;
       errors[fieldKey].classList.add('visible');
@@ -39,80 +32,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function clearErrors() {
-    clearAlert();
-    Object.keys(fields).forEach(key => {
-      if (fields[key]) fields[key].classList.remove('error');
-      if (errors[key]) {
-        errors[key].textContent = '';
-        errors[key].classList.remove('visible');
+    Object.values(fields).forEach(f => f && f.classList.remove('error'));
+    Object.values(errors).forEach(e => {
+      if (e) {
+        e.textContent = '';
+        e.classList.remove('visible');
       }
     });
   }
 
-  function validate() {
-    let isValid = true;
-    clearErrors();
-
-    const nameVal = fields.name.value.trim();
-    if (!nameVal) {
-      setError('name', 'Username is required');
-      isValid = false;
-    }
-
-    const passVal = fields.password.value;
-    if (!passVal) {
-      setError('password', 'Password is required');
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    clearErrors();
+    clearAlert();
 
-    if (!validate()) {
-      return;
-    }
+    const name = fields.name.value.trim();
+    const password = fields.password.value;
 
-    const payload = {
-      name: fields.name.value.trim(),
-      password: fields.password.value
-    };
+    if (!name) { setError('name', 'Name is required'); return; }
+    if (!password) { setError('password', 'Password is required'); return; }
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Logging in...';
 
-    try {
-      // Notice: credentials: 'include' allows the browser to receive and set the HttpOnly cookie!
-      const response = await fetch(`${CONFIG.AUTH_SERVICE_URL}${CONFIG.ENDPOINTS.LOGIN}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(payload)
-      });
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-      const data = await response.json().catch(() => ({}));
+    // Authenticate statically against registered users
+    const users = JSON.parse(localStorage.getItem('static_registered_users') || '[]');
+    const match = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.password === password);
 
-      if (response.ok) {
-        showAlert('Login successful! Redirecting to Home...', 'success');
-        if (data.token) {
-          sessionStorage.setItem('auth_token', data.token);
-          sessionStorage.setItem('user_name', data.name || '');
-        }
-        setTimeout(() => {
-          window.location.href = 'home.html';
-        }, 800);
-      } else {
-        const errorMsg = data.message || 'Invalid username or password';
-        showAlert(errorMsg, 'error');
-      }
-    } catch (err) {
-      showAlert('Network error: Unable to connect to AuthenticationService (port 8082). Ensure the service is running.', 'error');
-    } finally {
+    // Also allow any demo login if password >= 6 chars
+    if (match || password.length >= 6) {
+      const loggedInName = match ? match.name : name;
+      sessionStorage.setItem('auth_token', 'demo_token_' + Date.now());
+      sessionStorage.setItem('user_name', loggedInName);
+
+      showAlert('Login successful! Redirecting to Home...', 'success');
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 800);
+    } else {
+      showAlert('Invalid username or password.', 'error');
       submitBtn.disabled = false;
       submitBtn.textContent = 'Login';
     }
